@@ -1,0 +1,60 @@
+{
+    "manifest_version": 2,
+    "name": "Highlight Named Entity",
+    "version": "1.4.0.0",
+    "icons": {
+        "128": "icons/searchAndHighlightIcon.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "128": "icons/searchAndHighlightIcon.png"
+        },
+        "default_title": "Highlight NE",
+        "default_popup": "popup/popup.html",
+        "browser_style": true
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*",
+                "file:///*/*"
+            ],
+            "js": [
+                "contentScripts/scripts/jquery-3.7.0.min.js",
+                "contentScripts/scripts/contentScript.js",
+                "contentScripts/scripts/highlight.js"
+            ],
+            "css": [
+                "contentScripts/css/highlight.css"
+            ],
+            "all_frames": true,
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+        "scripts": [
+            "background/background.js"
+        ]
+    },
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+L"
+            }
+        },
+        "command_toggleHighlightNow": {
+            "suggested_key": {
+                "default": "Alt+Shift+L"
+            },
+            "description": "Toggle Highlight"
+        }
+    },
+    "permissions": [
+        "<all_urls>",
+        "http://127.0.0.1:5000/",
+        "http://127.0.0.1:8000/",
+        "webRequest",
+        "webRequestBlocking",
+        "storage"
+    ]
+}
